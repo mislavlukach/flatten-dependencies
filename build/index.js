@@ -12,6 +12,14 @@ var _appRootDir = _interopRequireDefault(require("app-root-dir"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function forceFlatDependency(name) {
   if (!_fs.default.existsSync(`node_modules/${name}/package.json`)) {
     throw new Error(`Singleton dependency ${name} must be explicitly added to package.json dependencies`);
@@ -51,11 +59,17 @@ function forceFlatDependency(name) {
 
 const packagePath = _path.default.join(_appRootDir.default.get(), 'package.json');
 
-const _JSON$parse = JSON.parse(_fs.default.readFileSync(packagePath, 'utf8')),
-      singletons = _JSON$parse.singletons;
+if (!_fs.default.existsSync(packagePath)) {
+  throw new Error('flatten-dependencies must be called from node/npm project');
+}
+
+const _process$argv = _toArray(process.argv),
+      node = _process$argv[0],
+      script = _process$argv[1],
+      singletons = _process$argv.slice(2);
 
 if (!Array.isArray(singletons)) {
-  throw new Error('package.json must have singletons key');
+  throw new Error('Usage: flatten-dependencies package1 package2 ...');
 }
 
 console.log('Flatting dependencies....');

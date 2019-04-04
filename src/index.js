@@ -17,9 +17,13 @@ function forceFlatDependency(name){
 }
 
 const packagePath = path.join(appRootDir.get(), 'package.json')
-const { singletons } = JSON.parse(fs.readFileSync(packagePath, 'utf8'))
+if (!fs.existsSync(packagePath)){
+  throw new Error('flatten-dependencies must be called from node/npm project')
+}
+const [node, script, ...singletons] = process.argv;
+
 if(!Array.isArray(singletons)){
-  throw new Error('package.json must have singletons key')
+  throw new Error('Usage: flatten-dependencies package1 package2 ...')
 }
 console.log('Flatting dependencies....')
 for(const singleton of singletons){
