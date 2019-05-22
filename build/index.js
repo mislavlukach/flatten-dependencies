@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 
 var _glob = _interopRequireDefault(require("glob"));
