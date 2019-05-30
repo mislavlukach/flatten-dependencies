@@ -22,7 +22,7 @@ npx flatten-dependencies graphql react @types/react
 
 ## Usage suggestion
 Just add the a call to this script into the `postinstall` part of the `package.json`:
-```package.json
+```
 ....
 "scripts": {
   ...
