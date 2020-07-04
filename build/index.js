@@ -73,7 +73,7 @@ if (!Array.isArray(singletons)) {
   throw new Error('Usage: flatten-dependencies package1 package2 ...');
 }
 
-console.log('Flatting dependencies....');
+console.log('Flattening dependencies....');
 var _iteratorNormalCompletion2 = true;
 var _didIteratorError2 = false;
 var _iteratorError2 = undefined;
