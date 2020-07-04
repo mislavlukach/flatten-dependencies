@@ -1,6 +1,6 @@
 {
   "name": "flatten-dependencies",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Make some of your npm dependencies singletons",
   "main": "index.js",
   "scripts": {
