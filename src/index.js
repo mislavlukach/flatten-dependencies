@@ -26,7 +26,7 @@ const [node, script, ...singletons] = process.argv;
 if(!Array.isArray(singletons)){
   throw new Error('Usage: flatten-dependencies package1 package2 ...')
 }
-console.log('Flatting dependencies....')
+console.log('Flattening dependencies....')
 for(const singleton of singletons){
   forceFlatDependency(singleton)
 }
